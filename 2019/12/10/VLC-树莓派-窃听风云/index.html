@@ -1,226 +1,113 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+<!DOCTYPE html><html lang=""><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> VLC-pi-窃听风云 · lcf1998</title><meta name="description" content="just do it!"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/jekyll.css"><!--[if lt IE 9]>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]--><link rel="alternate" href="/atom.xml" title="lcf1998" type="application/atom+xml">
+</head><body><header class="row-flex-row limit-width vh-center"><a href="/" class="logo"><img src="/favicon.png"></a><nav><ul class="nav-list"><li class="nav-list-item"><a href="/" class="nav-link">Home</a></li><li class="nav-list-item"><a href="/archives/" class="nav-link active">   Blog</a></li><li class="nav-list-item"><a href="https://github.com/lcf1998" target="_blank" class="nav-link">github</a></li><li class="nav-list-item"><a href="https://coding.net/u/xxxxx" target="_blank" class="nav-link">coding</a></li><li class="nav-list-item"><a href="http://weibo.com/xxxx" target="_blank" class="nav-link">weibo</a></li><li class="nav-list-item"><a href="/atom.xml" class="nav-link">rss</a></li></ul></nav></header><div class="container limit-width"><section class="row-flex-row"><div class="post"><article class="post-block"><h2 class="post-title"><a href="/2019/12/10/VLC-%E6%A0%91%E8%8E%93%E6%B4%BE-%E7%AA%83%E5%90%AC%E9%A3%8E%E4%BA%91/" class="post-title-link">VLC-pi-窃听风云</a></h2><div class="post-meta"><ul class="post-tag-list"><li class="post-tag-item"><a href="/tags/VLC/" class="post-tag-link">VLC</a></li><li class="post-tag-item"><a href="/tags/RTMP/" class="post-tag-link">RTMP</a></li><li class="post-tag-item"><a href="/tags/Nginx/" class="post-tag-link">Nginx</a></li></ul><div class="post-time">Tuesday, December 10th 2019</div></div><div class="post-content"><ul>
+<li>树莓派</li>
+<li>usb麦克风</li>
+<li>VLC App</li>
+<li>耳机<a id="more"></a>
+</li>
+</ul>
+<hr>
+<hr>
+<h1 id="基于树莓派实现“窃听风云”"><a href="#基于树莓派实现“窃听风云”" class="headerlink" title="基于树莓派实现“窃听风云”"></a>基于树莓派实现“窃听风云”</h1><h2 id="01-所需材料"><a href="#01-所需材料" class="headerlink" title="01 所需材料"></a>01 所需材料</h2><hr>
+<p>1.树莓派 <strong>带 usb声卡</strong><br>2.usb麦克风<br>3.VPS服务器<br><strong>一般家庭的宽带都不是公网IP，外网无法直接连接，所以需要使用VPS服务器来实现FRP内网穿透，这样就可以直接访问家庭内部主机了。</strong><br>4.手机<br>5.VLC app<br><strong>VLC 是一款自由、开源的跨平台多媒体播放器及框架，可播放大多数多媒体文件，以及 DVD、音频 CD、VCD 及各类流媒体协议。</strong><br>6.耳机</p>
+<hr>
+<h2 id="02-技术介绍"><a href="#02-技术介绍" class="headerlink" title="02 技术介绍"></a>02 技术介绍</h2><h3 id="使用-nginx-rtmp搭建音频直播流媒体服务器和FRP内网穿透。"><a href="#使用-nginx-rtmp搭建音频直播流媒体服务器和FRP内网穿透。" class="headerlink" title="使用 nginx+rtmp搭建音频直播流媒体服务器和FRP内网穿透。"></a>使用 nginx+rtmp搭建音频直播流媒体服务器和FRP内网穿透。</h3><ul>
+<li><p>Nginx 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务</p>
+</li>
+<li><p>RTMP协议是Real Time Message Protocol(实时信息传输协议)的缩写，它是由Adobe公司提出的一种应用层的协议，用来解决多媒体数据传输流的多路复用（Multiplexing）和分包（packetizing）的问题。随着VR技术的发展，视频直播等领域逐渐活跃起来，RTMP作为业内广泛使用的协议也重新被相关开发者重视起来。</p>
+</li>
+<li><p>FRP是fast reverse proxy的缩写，简单地说，FRP就是一个反向代理软件，它具有体积轻量且功能强大特点，可以使处于内网或防火墙后的设备对外界提供服务。</p>
+</li>
+</ul>
+<hr>
+<h2 id="03-环境搭建"><a href="#03-环境搭建" class="headerlink" title="03 环境搭建"></a>03 环境搭建</h2><h3 id="3-1-在树莓派上使用nginx-rtmp搭建音频直播流媒体服务器"><a href="#3-1-在树莓派上使用nginx-rtmp搭建音频直播流媒体服务器" class="headerlink" title="3.1 在树莓派上使用nginx+rtmp搭建音频直播流媒体服务器"></a>3.1 在树莓派上使用nginx+rtmp搭建音频直播流媒体服务器</h3><h4 id="1-安装所需要的依赖"><a href="#1-安装所需要的依赖" class="headerlink" title="1. 安装所需要的依赖"></a>1. 安装所需要的依赖</h4><pre><code class="bash">sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev</code></pre>
+<h4 id="2-安装nginx和rtmp"><a href="#2-安装nginx和rtmp" class="headerlink" title="2. 安装nginx和rtmp"></a>2. 安装nginx和rtmp</h4><pre><code class="bash">wget http://nginx.org/download/nginx-1.17.0.tar.gz
+wget https://github.com/arut/nginx-rtmp-module/archive/master.zip
+tar -zxvf nginx-1.17.0.tar.gz
+unzip master.zip
+cd nginx-1.17.0
+./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master
+sudo make
+sudo make install</code></pre>
+<h4 id="3-修改nginx配置文件"><a href="#3-修改nginx配置文件" class="headerlink" title="3. 修改nginx配置文件"></a>3. 修改nginx配置文件</h4><p><strong>执行 sudo nano /usr/local/nginx/conf/nginx.conf，追加如下内容。</strong></p>
+<pre><code class="bash"># RTMP协议
+rtmp {
+   # 创建一个服务，监听1935端口，这个是RTMP默认的端口
+    server {
+        listen 1935;   #默认端口
+        chunk_size 4096;
+        # 创建了一个名为live的应用， 支持直播
+        application live {
+            live on;
+         }
+    }
+}</code></pre>
+<h4 id="4-启动nginx-rtmp流媒体服务器"><a href="#4-启动nginx-rtmp流媒体服务器" class="headerlink" title="4. 启动nginx+rtmp流媒体服务器"></a>4. 启动nginx+rtmp流媒体服务器</h4><pre><code class="bash">sudo /usr/local/nginx/sbin/nginx</code></pre>
+<h4 id="5-安装ffmpeg"><a href="#5-安装ffmpeg" class="headerlink" title="5. 安装ffmpeg"></a>5. 安装ffmpeg</h4><pre><code class="bash">sudo apt install ffmpeg</code></pre>
+<h4 id="6-将usb麦克风插入到树莓派的usb口，启动ffmpeg从usb麦克风实时采集音频，并推流到树莓派上搭建好的nginx-rtmp流媒体服务器上。"><a href="#6-将usb麦克风插入到树莓派的usb口，启动ffmpeg从usb麦克风实时采集音频，并推流到树莓派上搭建好的nginx-rtmp流媒体服务器上。" class="headerlink" title="6. 将usb麦克风插入到树莓派的usb口，启动ffmpeg从usb麦克风实时采集音频，并推流到树莓派上搭建好的nginx+rtmp流媒体服务器上。"></a>6. 将usb麦克风插入到树莓派的usb口，启动ffmpeg从usb麦克风实时采集音频，并推流到树莓派上搭建好的nginx+rtmp流媒体服务器上。</h4><pre><code class="bash">ffmpeg -f alsa -ac 2 -i hw:1,0 -ar 44100 -f flv rtmp://localhost/live/audio</code></pre>
+<p>参数说明<br>主要参数</p>
+<ul>
+<li><p>-f 设定输出格式</p>
+</li>
+<li><p>-i 设定输入流（hw:1,0为外接的usb音频采集卡设备，hw:1,0的1指的是第一个外部设备，因为树莓派内部没有声卡，所以只能使用外部的usb音频采集卡）；</p>
+</li>
+<li><p>-ar 设定采样率（因为输出为flv格式，所以采样率只能选择44100，22050，11025这三种）；</p>
+<h4 id="7-在windows客户端中使用VLC软件打开网络串流"><a href="#7-在windows客户端中使用VLC软件打开网络串流" class="headerlink" title="7. 在windows客户端中使用VLC软件打开网络串流"></a>7. 在windows客户端中使用VLC软件打开网络串流</h4></li>
+</ul>
+<p><strong>地址为“rtmp://192.168.1.150/live/audio”，即可收听到树莓派麦克风上捕获到的声音。当前，可以在树莓派相同的wifi网络下，可以实现窃听，如果想要实现在任何地方的外网收听，还需要实现下面的FRP内网穿透。</strong></p>
+<hr>
+<h3 id="3-2-在树莓派上搭建FRP内网穿透服务"><a href="#3-2-在树莓派上搭建FRP内网穿透服务" class="headerlink" title="3.2 在树莓派上搭建FRP内网穿透服务"></a>3.2 在树莓派上搭建FRP内网穿透服务</h3><p><em>3.2.1服务器-frps(VPS服务器)</em></p>
+<h4 id="1-下载程序"><a href="#1-下载程序" class="headerlink" title="1. 下载程序"></a>1. 下载程序</h4><p>我的VPS服务器是unbuntu系统，使用的是arm64架构，所以需要下载arm64架构的frp软件。</p>
+<pre><code class="bash">wget --no-check-certificate https://github.com/fatedier/frp/releases/download/v0.20.0/frp_0.20.0_linux_amd64.tar.gz</code></pre>
+<h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><pre><code class="bash">tar -xzvf frp_0.20.0_linux_amd64.tar.gz</code></pre>
+<h4 id="新建文件夹"><a href="#新建文件夹" class="headerlink" title="新建文件夹"></a>新建文件夹</h4><pre><code class="bash">sudo mkdir -p /usr/local/frp</code></pre>
+<h4 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h4><pre><code class="bash">sudo mv frp_0.18.0_linux_amd64 /usr/local/frp
+cd /usr/local/frp</code></pre>
+<h4 id="确保frps程序具有可执行权限"><a href="#确保frps程序具有可执行权限" class="headerlink" title="确保frps程序具有可执行权限"></a>确保frps程序具有可执行权限</h4><pre><code class="bash">chmod +x frps</code></pre>
+<p><em>说明：目录下只主要关注4个文件，分别是frpc、frpc.ini和frps、frps.ini，前者两个文件是客户端所关注文件，后者两个文件是服务端所关注两个文件。</em></p>
+<h4 id="配置程序"><a href="#配置程序" class="headerlink" title="配置程序"></a>配置程序</h4><p><strong>首先删掉 frpc、frpc.ini 两个文件，然后再进行配置，nano ./frps.ini</strong></p>
+<pre><code class="bash">[common]
+bindport = 9000           #与客户端绑定的进行通信的端口
+auto_token = hell.world      #客户端连接服务器端的口令</code></pre>
+<p><strong>验证frps是否安装成功：</strong></p>
+<pre><code class="bash">./frps -c frps.ini</code></pre>
+<p><strong>使frps开机启动</strong></p>
+<pre><code class="bash">nohup /usr/local/frpfrps -c /usr/local/frp/frps.ini &amp;
+编辑/etc/rc.local文件，将启动那句命令加到exit 0语句之前（如果有）</code></pre>
+<hr>
+<h3 id="3-2-2-客户端-frpc（树莓派）"><a href="#3-2-2-客户端-frpc（树莓派）" class="headerlink" title="3.2.2 客户端-frpc（树莓派）"></a>3.2.2 客户端-frpc（树莓派）</h3><h4 id="1-下载FRP"><a href="#1-下载FRP" class="headerlink" title="1. 下载FRP"></a>1. 下载FRP</h4><pre><code class="bash">wget https://github.com/fatedier/frp/releases/download/v0.20.0/frp_0.20.0_linux_arm.tar.gz</code></pre>
+<h4 id="2-修改frpc-ini文件"><a href="#2-修改frpc-ini文件" class="headerlink" title="2. 修改frpc.ini文件"></a>2. 修改frpc.ini文件</h4><pre><code class="bash">[common]
 
-  
-  <title>VLC-pi-窃听风云 | lcf1998</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="just do it!">
-<meta property="og:type" content="article">
-<meta property="og:title" content="VLC-pi-窃听风云">
-<meta property="og:url" content="http:&#x2F;&#x2F;yousite.com&#x2F;2019&#x2F;12&#x2F;10&#x2F;VLC-%E6%A0%91%E8%8E%93%E6%B4%BE-%E7%AA%83%E5%90%AC%E9%A3%8E%E4%BA%91&#x2F;index.html">
-<meta property="og:site_name" content="lcf1998">
-<meta property="og:description" content="just do it!">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-12-10T07:57:00.000Z">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="lcf1998" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+server_addr = XXX.XXX.XXX.XXX  #VPS服务器的公网IP
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">lcf1998</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">I am networker</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yousite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-VLC-树莓派-窃听风云" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/10/VLC-%E6%A0%91%E8%8E%93%E6%B4%BE-%E7%AA%83%E5%90%AC%E9%A3%8E%E4%BA%91/" class="article-date">
-  <time datetime="2019-12-10T07:57:00.000Z" itemprop="datePublished">2019-12-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      VLC-pi-窃听风云
-    </h1>
-  
+server_port = 9000                    #与服务端bind_port一致
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yousite.com/2019/12/10/VLC-%E6%A0%91%E8%8E%93%E6%B4%BE-%E7%AA%83%E5%90%AC%E9%A3%8E%E4%BA%91/" data-id="ck67nxa560005v7yq5n4iawko" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-gmediarender-%E6%97%A0%E7%BA%BF%E9%9F%B3%E7%AE%B1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          树莓派-gmediarender-无线音箱
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/12/04/%E6%A0%91%E8%8E%93%E6%B4%BE/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">树莓派</div>
-    </a>
-  
-</nav>
+auto_token = hello.world            #客户端连接服务器端的口令</code></pre>
+<pre><code class="bash">[RTMP]
 
-  
-</article>
+type = tcp               #连接协议
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
+local_ip = 127.0.0.1     #内网服务器ip
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/airport/" rel="tag">airport</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dlna/" rel="tag">dlna</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-dash/" rel="tag">linux-dash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry pi</a></li></ul>
-    </div>
-  </div>
+local_port = 1935         #RTMP默认的端口
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/airport/" style="font-size: 10px;">airport</a> <a href="/tags/dlna/" style="font-size: 10px;">dlna</a> <a href="/tags/linux-dash/" style="font-size: 10px;">linux-dash</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-linux-dash/">树莓派-linux-dash</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-gmediarender-%E6%97%A0%E7%BA%BF%E9%9F%B3%E7%AE%B1/">树莓派-gmediarender-无线音箱</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/10/VLC-%E6%A0%91%E8%8E%93%E6%B4%BE-%E7%AA%83%E5%90%AC%E9%A3%8E%E4%BA%91/">VLC-pi-窃听风云</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/04/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/02/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 Lee Jerry<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-
-  </div>
-</body>
-</html>
+remote_port = 6000       #自定义的访问内部RTMP端口号</code></pre>
+<h4 id="3-启动frpc"><a href="#3-启动frpc" class="headerlink" title="3. 启动frpc"></a>3. 启动frpc</h4><p><strong>执行sudo ./frpc -c ./frpc.ini启动，这是前台启动，后台启动命令为：</strong></p>
+<pre><code class="bash">sudo nohup ./frpc -c ./frpc.ini &amp;</code></pre>
+<hr>
+<h2 id="04-开始远程监听"><a href="#04-开始远程监听" class="headerlink" title="04 开始远程监听"></a>04 开始远程监听</h2><ul>
+<li><p>使用手机下载VLC Media Player，并将耳机连接到手机上（除非你想让窃听的内容被周围的人听到，当然也可以不连接耳机）。</p>
+</li>
+<li><p>手机上打开VLC软件，打开网络串流，地址为“rtmp://XXX.XXX.XXX.XXX:6000/live/audio” 说明：XXX.XXX.XXX.XXX为VPS服务器的IP地址。</p>
+</li>
+<li><p>稍等一会，在耳机中即可听到远程的实时声音。注意，声音是有延迟的，对于我的网络大概延迟2s左右，具体需要自行测量。</p>
+</li>
+</ul>
+<p><em>备注：如果连接不成功，可以关闭VLC软件，重试几次即可。</em></p>
+</div></article><div class="pagination"><a href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-gmediarender-%E6%97%A0%E7%BA%BF%E9%9F%B3%E7%AE%B1/" class="pagination-prev">PREV</a><a href="/2019/12/04/%E6%A0%91%E8%8E%93%E6%B4%BE/" class="pagination-next">NEXT</a></div><div class="comments"></div></div><aside class="sidebar"><h3>分类标签</h3><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTMP/" rel="tag">RTMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VLC/" rel="tag">VLC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/airport/" rel="tag">airport</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dlna/" rel="tag">dlna</a></li></ul><h3>最新文章</h3><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-linux-dash/">树莓派-linux-dash</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-gmediarender-%E6%97%A0%E7%BA%BF%E9%9F%B3%E7%AE%B1/">树莓派-gmediarender-无线音箱</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/10/VLC-%E6%A0%91%E8%8E%93%E6%B4%BE-%E7%AA%83%E5%90%AC%E9%A3%8E%E4%BA%91/">VLC-pi-窃听风云</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/04/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/02/hello-world/">Hello World</a></li></ul></aside></section></div><div class="extra"></div><footer class="footer"><div class="row-flex-row limit-width vh-center"><div class="copyright"><P>© 2020 <a href="/">Lee Jerry</P></div><div class="power"><p><a href="http://pinggod.com/" target="_blank" rel="noopener">Sean Sun</a>, 
+<a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>, 
+<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>, 
+<a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a></p></div></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-80781234-1",'auto');ga('send','pageview');</script><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "//";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
