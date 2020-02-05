@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>树莓派-gmediarender-无线音箱 | lcf1998</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="无线音箱，DLNA推送音频，gmediarender -f “raspberry pi”">
+<meta name="keywords" content="dlna,airport">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派-gmediarender-无线音箱">
+<meta property="og:url" content="http:&#x2F;&#x2F;yousite.com&#x2F;2020&#x2F;02&#x2F;04&#x2F;%E6%A0%91%E8%8E%93%E6%B4%BE-gmediarender-%E6%97%A0%E7%BA%BF%E9%9F%B3%E7%AE%B1&#x2F;index.html">
+<meta property="og:site_name" content="lcf1998">
+<meta property="og:description" content="无线音箱，DLNA推送音频，gmediarender -f “raspberry pi”">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-02-04T09:06:12.000Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lcf1998" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lcf1998</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">I am networker</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yousite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-树莓派-gmediarender-无线音箱" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-gmediarender-%E6%97%A0%E7%BA%BF%E9%9F%B3%E7%AE%B1/" class="article-date">
+  <time datetime="2020-02-04T09:06:12.000Z" itemprop="datePublished">2020-02-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      树莓派-gmediarender-无线音箱
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>无线音箱，DLNA推送音频，gmediarender -f “raspberry pi”</p>
+<a id="more"></a>
+<h1 id="基于gmediarender树莓派搭建DLNA客户端，只支持音频"><a href="#基于gmediarender树莓派搭建DLNA客户端，只支持音频" class="headerlink" title="基于gmediarender树莓派搭建DLNA客户端，只支持音频"></a>基于gmediarender树莓派搭建DLNA客户端，只支持音频</h1><p>目前搭建DLNA服务器有minidlna，不过不能进行DLNA推送，只能执行树莓派的媒体服务器</p>
+<hr>
+<h2 id="1-更新源，安装依赖"><a href="#1-更新源，安装依赖" class="headerlink" title="1 更新源，安装依赖"></a>1 更新源，安装依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">+ sudo apt-get update</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">+ sudo apt-get install libupnp-dev libgstreamer1.0-dev \gstreamer1.0-plugins-base gstreamer1.0-plugins-good \gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \gstreamer1.0-alsa autoconf</span></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-安装gmediarender"><a href="#2-安装gmediarender" class="headerlink" title="2 安装gmediarender"></a>2 安装gmediarender</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hzeller/gmrender-resurrect.git</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> gmrender-resurrect</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">sudo ./autogen.sh</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sudo ./configure</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">sudo make </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">sudo make install</span></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-启动gmediarender"><a href="#3-启动gmediarender" class="headerlink" title="3 启动gmediarender"></a>3 启动gmediarender</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo gmediarender -f <span class="string">"输入DLNA设备名称"</span></span></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-添加到启动项"><a href="#4-添加到启动项" class="headerlink" title="4 添加到启动项"></a>4 添加到启动项</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo nano /etc/rc.local</span></pre></td></tr></table></figure>
+<p>在exit 0 前添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo gmediarender -f <span class="string">"设备名称"</span> &amp;</span></pre></td></tr></table></figure>
+<p><em>&amp;的意思是作为系统进程开机运行</em></p>
+<hr>
+<hr>
+<h1 id="基于树莓派的Airplay无线音频传输"><a href="#基于树莓派的Airplay无线音频传输" class="headerlink" title="基于树莓派的Airplay无线音频传输"></a>基于树莓派的Airplay无线音频传输</h1><h2 id="1-安装依赖工具包"><a href="#1-安装依赖工具包" class="headerlink" title="1 安装依赖工具包"></a>1 安装依赖工具包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo apt-get install libssl-dev libavahi-client-dev libasound2-dev libao-dev libpulse-dev</span></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-安装shairport"><a href="#2-安装shairport" class="headerlink" title="2 安装shairport"></a>2 安装shairport</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo apt-get install shairport-sync</span></pre></td></tr></table></figure>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yousite.com/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-gmediarender-%E6%97%A0%E7%BA%BF%E9%9F%B3%E7%AE%B1/" data-id="ck67nvc150001v7yqbi7n36eh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/airport/" rel="tag">airport</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dlna/" rel="tag">dlna</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-linux-dash/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          树莓派-linux-dash
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/10/VLC-%E6%A0%91%E8%8E%93%E6%B4%BE-%E7%AA%83%E5%90%AC%E9%A3%8E%E4%BA%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VLC-pi-窃听风云</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/airport/" rel="tag">airport</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dlna/" rel="tag">dlna</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-dash/" rel="tag">linux-dash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry pi</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/airport/" style="font-size: 10px;">airport</a> <a href="/tags/dlna/" style="font-size: 10px;">dlna</a> <a href="/tags/linux-dash/" style="font-size: 10px;">linux-dash</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-linux-dash/">树莓派-linux-dash</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-gmediarender-%E6%97%A0%E7%BA%BF%E9%9F%B3%E7%AE%B1/">树莓派-gmediarender-无线音箱</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/10/VLC-%E6%A0%91%E8%8E%93%E6%B4%BE-%E7%AA%83%E5%90%AC%E9%A3%8E%E4%BA%91/">VLC-pi-窃听风云</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/04/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/02/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Lee Jerry<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
