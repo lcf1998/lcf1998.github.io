@@ -89,8 +89,10 @@
 <meta property="og:site_name" content="有趣的蜜罐人">
 <meta property="og:description" content="linux-dash&#x2F;app&#x2F;server node index.js –port 1234">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:18:56.000Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yousite.com&#x2F;img&#x2F;linux-dash.png">
+<meta property="og:updated_time" content="2020-02-07T16:00:00.000Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yousite.com&#x2F;img&#x2F;linux-dash.png">
 
 
 
@@ -100,7 +102,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","display_updated":true,"offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -220,16 +222,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-categories">
           <a href="/categories/%20" rel="section">
             
@@ -297,7 +289,7 @@
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-raspberry" itemscope itemtype="http://schema.org/Article">
   
   
   
@@ -337,7 +329,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-08T00:00:00+08:00">
+                2020-02-08
+              </time>
             
           </span>
 
@@ -369,6 +373,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  271
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
 
           
 
@@ -397,7 +432,7 @@
 cd linux-dash/app/server
 </code></pre><hr>
 <h2 id="2-使用Nodejs运行Linux-Dash"><a href="#2-使用Nodejs运行Linux-Dash" class="headerlink" title="2 使用Nodejs运行Linux-Dash"></a>2 使用Nodejs运行Linux-Dash</h2><hr>
-<p><em>安装 nodejs –<a href="">树莓派安装配置nodejs</a>– 这篇教程</em></p>
+<p><em>安装 nodejs –<a href>树莓派安装配置nodejs</a>– 这篇教程</em></p>
 <hr>
 <h2 id="3-安装依赖"><a href="#3-安装依赖" class="headerlink" title="3 安装依赖"></a>3 安装依赖</h2><hr>
 <ul>
@@ -408,7 +443,8 @@ cd linux-dash/app/server
 <ul>
 <li>在linux-dash/app/server目录下执行以下命令</li>
 </ul>
-<pre><code>sudo node index.js --port 1234(如果不指定端口，会默认80端口)</code></pre><ul>
+<pre><code>sudo node index.js --port 1234 
+#(&quot;如果不指定端口，会默认80端口&quot;)</code></pre><ul>
 <li>然后打开浏览器，http://树莓派的ip:端口</li>
 </ul>
 <hr>
@@ -422,8 +458,10 @@ cd linux-dash/app/server
 <h2 id="5-开机自启动linux-dash"><a href="#5-开机自启动linux-dash" class="headerlink" title="5 开机自启动linux-dash"></a>5 开机自启动linux-dash</h2><p>新建一个脚本linux-dash.sh</p>
 <pre><code>#!/bin/bash
 cd /linux-dash/app/server
-sudo node index.js --port 1111(端口号随便定)</code></pre><p>修改文件其权限</p>
+sudo node index.js --port 1111 
+#(&quot;端口号随便定&quot;)</code></pre><p>修改文件其权限</p>
 <pre><code>sudo chmod 755 linux-dash.sh</code></pre><p><em>把linux-dash.sh脚本放进/etc/profile.d/</em><br><em>重启电脑就OK了</em></p>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/.com//../../../img/linux-dash.png" alt></p>
 
       
     </div>
@@ -465,6 +503,10 @@ sudo node index.js --port 1111(端口号随便定)</code></pre><p>修改文件�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/08/PentestBox/" rel="prev" title="PentestBox">
+                PentestBox <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -545,7 +587,7 @@ sudo node index.js --port 1111(端口号随便定)</code></pre><p>修改文件�
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -620,7 +662,7 @@ sudo node index.js --port 1111(端口号随便定)</code></pre><p>修改文件�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于树莓派搭建一个实现实时监控系统"><span class="nav-number">1.</span> <span class="nav-text">基于树莓派搭建一个实现实时监控系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装linux-dash"><span class="nav-number">1.1.</span> <span class="nav-text">1 安装linux-dash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用Nodejs运行Linux-Dash"><span class="nav-number">1.2.</span> <span class="nav-text">2 使用Nodejs运行Linux-Dash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装依赖"><span class="nav-number">1.3.</span> <span class="nav-text">3 安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-启动linux-dash"><span class="nav-number">1.4.</span> <span class="nav-text">4 启动linux-dash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-开机自启动linux-dash"><span class="nav-number">1.5.</span> <span class="nav-text">5 开机自启动linux-dash</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于树莓派搭建一个实现实时监控系统"><span class="nav-number">1.</span> <span class="nav-text">基于树莓派搭建一个实现实时监控系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装linux-dash"><span class="nav-number">1.1.</span> <span class="nav-text">1 安装linux-dash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用Nodejs运行Linux-Dash"><span class="nav-number">1.2.</span> <span class="nav-text">2 使用Nodejs运行Linux-Dash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装依赖"><span class="nav-number">1.3.</span> <span class="nav-text">3 安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-启动linux-dash"><span class="nav-number">1.4.</span> <span class="nav-text">4 启动linux-dash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-开机自启动linux-dash"><span class="nav-number">1.5.</span> <span class="nav-text">5 开机自启动linux-dash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#效果图"><span class="nav-number">1.5.1.</span> <span class="nav-text">效果图</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -640,7 +682,7 @@ sudo node index.js --port 1111(端口号随便定)</code></pre><p>修改文件�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -650,15 +692,11 @@ sudo node index.js --port 1111(端口号随便定)</code></pre><p>修改文件�
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
 
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
 
 
 

@@ -6,7 +6,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://yousite.com/"/>
-  <updated>2020-02-04T09:18:56.000Z</updated>
+  <updated>2020-02-08T08:45:02.000Z</updated>
   <id>http://yousite.com/</id>
   
   <author>
@@ -17,19 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>PentestBox</title>
+    <link href="http://yousite.com/2020/02/08/PentestBox/"/>
+    <id>http://yousite.com/2020/02/08/PentestBox/</id>
+    <published>2020-02-08T08:45:02.000Z</published>
+    <updated>2020-02-08T08:45:02.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>树莓派-linux-dash</title>
     <link href="http://yousite.com/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-linux-dash/"/>
     <id>http://yousite.com/2020/02/04/%E6%A0%91%E8%8E%93%E6%B4%BE-linux-dash/</id>
     <published>2020-02-04T09:18:56.000Z</published>
-    <updated>2020-02-04T09:18:56.000Z</updated>
+    <updated>2020-02-07T16:00:00.000Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>linux-dash/app/server</li><li>node index.js –port 1234<a id="more"></a></li></ul><hr><h1 id="基于树莓派搭建一个实现实时监控系统"><a href="#基于树莓派搭建一个实现实时监控系统" class="headerlink" title="基于树莓派搭建一个实现实时监控系统"></a>基于树莓派搭建一个实现实时监控系统</h1><p>—体积小，速度快，配置方便—</p><h2 id="1-安装linux-dash"><a href="#1-安装linux-dash" class="headerlink" title="1 安装linux-dash"></a>1 安装linux-dash</h2><hr><pre><code>git clone --depth 1 https://github.com/afaqurk/linux-dashcd linux-dash/app/server</code></pre><hr><h2 id="2-使用Nodejs运行Linux-Dash"><a href="#2-使用Nodejs运行Linux-Dash" class="headerlink" title="2 使用Nodejs运行Linux-Dash"></a>2 使用Nodejs运行Linux-Dash</h2><hr><p><em>安装 nodejs –<a href="">树莓派安装配置nodejs</a>– 这篇教程</em></p><hr><h2 id="3-安装依赖"><a href="#3-安装依赖" class="headerlink" title="3 安装依赖"></a>3 安装依赖</h2><hr><ul><li>在linux-dash/app/server文件夹下输入命令</li></ul><pre><code>npm install --production</code></pre><p><em>(这个过程需要等待)</em></p><h2 id="4-启动linux-dash"><a href="#4-启动linux-dash" class="headerlink" title="4 启动linux-dash"></a>4 启动linux-dash</h2><hr><ul><li>在linux-dash/app/server目录下执行以下命令</li></ul><pre><code>sudo node index.js --port 1234(如果不指定端口，会默认80端口)</code></pre><ul><li>然后打开浏览器，http://树莓派的ip:端口</li></ul><hr><ul><li>用Pyhton语言运行</li></ul><pre><code>python index.py --port 1234</code></pre><ul><li>用Go语言运行</li></ul><pre><code>go run index.go --port 1234</code></pre><p><em>(python 运行执行出来的结果不理想不建议)</em></p><h2 id="5-开机自启动linux-dash"><a href="#5-开机自启动linux-dash" class="headerlink" title="5 开机自启动linux-dash"></a>5 开机自启动linux-dash</h2><p>新建一个脚本linux-dash.sh</p><pre><code>#!/bin/bashcd /linux-dash/app/serversudo node index.js --port 1111(端口号随便定)</code></pre><p>修改文件其权限</p><pre><code>sudo chmod 755 linux-dash.sh</code></pre><p><em>把linux-dash.sh脚本放进/etc/profile.d/</em><br><em>重启电脑就OK了</em></p>]]></content>
+    <content type="html"><![CDATA[<ul><li>linux-dash/app/server</li><li>node index.js –port 1234<a id="more"></a></li></ul><hr><h1 id="基于树莓派搭建一个实现实时监控系统"><a href="#基于树莓派搭建一个实现实时监控系统" class="headerlink" title="基于树莓派搭建一个实现实时监控系统"></a>基于树莓派搭建一个实现实时监控系统</h1><p>—体积小，速度快，配置方便—</p><h2 id="1-安装linux-dash"><a href="#1-安装linux-dash" class="headerlink" title="1 安装linux-dash"></a>1 安装linux-dash</h2><hr><pre><code>git clone --depth 1 https://github.com/afaqurk/linux-dashcd linux-dash/app/server</code></pre><hr><h2 id="2-使用Nodejs运行Linux-Dash"><a href="#2-使用Nodejs运行Linux-Dash" class="headerlink" title="2 使用Nodejs运行Linux-Dash"></a>2 使用Nodejs运行Linux-Dash</h2><hr><p><em>安装 nodejs –<a href>树莓派安装配置nodejs</a>– 这篇教程</em></p><hr><h2 id="3-安装依赖"><a href="#3-安装依赖" class="headerlink" title="3 安装依赖"></a>3 安装依赖</h2><hr><ul><li>在linux-dash/app/server文件夹下输入命令</li></ul><pre><code>npm install --production</code></pre><p><em>(这个过程需要等待)</em></p><h2 id="4-启动linux-dash"><a href="#4-启动linux-dash" class="headerlink" title="4 启动linux-dash"></a>4 启动linux-dash</h2><hr><ul><li>在linux-dash/app/server目录下执行以下命令</li></ul><pre><code>sudo node index.js --port 1234 #(&quot;如果不指定端口，会默认80端口&quot;)</code></pre><ul><li>然后打开浏览器，http://树莓派的ip:端口</li></ul><hr><ul><li>用Pyhton语言运行</li></ul><pre><code>python index.py --port 1234</code></pre><ul><li>用Go语言运行</li></ul><pre><code>go run index.go --port 1234</code></pre><p><em>(python 运行执行出来的结果不理想不建议)</em></p><h2 id="5-开机自启动linux-dash"><a href="#5-开机自启动linux-dash" class="headerlink" title="5 开机自启动linux-dash"></a>5 开机自启动linux-dash</h2><p>新建一个脚本linux-dash.sh</p><pre><code>#!/bin/bashcd /linux-dash/app/serversudo node index.js --port 1111 #(&quot;端口号随便定&quot;)</code></pre><p>修改文件其权限</p><pre><code>sudo chmod 755 linux-dash.sh</code></pre><p><em>把linux-dash.sh脚本放进/etc/profile.d/</em><br><em>重启电脑就OK了</em></p><h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/.com//../../../img/linux-dash.png" alt></p>]]></content>
     
     <summary type="html">
     
       &lt;ul&gt;
 &lt;li&gt;linux-dash/app/server&lt;/li&gt;
-&lt;li&gt;node index.js –port 1234
+&lt;li&gt;node index.js –port 1234&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
@@ -48,7 +63,7 @@
     <published>2020-02-04T09:06:12.000Z</published>
     <updated>2020-02-04T09:06:12.000Z</updated>
     
-    <content type="html"><![CDATA[<p>无线音箱，DLNA推送音频，gmediarender -f “raspberry pi”</p><a id="more"></a><h1 id="基于gmediarender树莓派搭建DLNA客户端，只支持音频"><a href="#基于gmediarender树莓派搭建DLNA客户端，只支持音频" class="headerlink" title="基于gmediarender树莓派搭建DLNA客户端，只支持音频"></a>基于gmediarender树莓派搭建DLNA客户端，只支持音频</h1><p>目前搭建DLNA服务器有minidlna，不过不能进行DLNA推送，只能执行树莓派的媒体服务器</p><hr><h2 id="1-更新源，安装依赖"><a href="#1-更新源，安装依赖" class="headerlink" title="1 更新源，安装依赖"></a>1 更新源，安装依赖</h2><pre><code>sudo apt-get updatesudo apt-get install libupnp-dev libgstreamer1.0-dev \gstreamer1.0-plugins-base gstreamer1.0-plugins-good\gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \gstreamer1.0-alsa autoconf</code></pre><hr><h2 id="2-安装gmediarender"><a href="#2-安装gmediarender" class="headerlink" title="2 安装gmediarender"></a>2 安装gmediarender</h2><pre><code>git clone https://github.com/hzeller/gmrender-resurrect.gitcd gmrender-resurrectsudo ./autogen.shsudo ./configuresudo make sudo make install</code></pre><hr><h2 id="3-启动gmediarender"><a href="#3-启动gmediarender" class="headerlink" title="3 启动gmediarender"></a>3 启动gmediarender</h2><pre><code>sudo gmediarender -f &quot;输入DLNA设备名称&quot;</code></pre><hr><h2 id="4-添加到启动项"><a href="#4-添加到启动项" class="headerlink" title="4 添加到启动项"></a>4 添加到启动项</h2><pre><code>sudo nano /etc/rc.local</code></pre><p><em>在exit 0 前添加</em></p><pre><code class="bash">sudo gmediarender -f &quot;设备名称&quot; &amp;</code></pre><p><em>&amp;的意思是作为系统进程开机运行</em></p><hr><hr><h1 id="基于树莓派的Airplay无线音频传输"><a href="#基于树莓派的Airplay无线音频传输" class="headerlink" title="基于树莓派的Airplay无线音频传输"></a>基于树莓派的Airplay无线音频传输</h1><h2 id="1-安装依赖工具包"><a href="#1-安装依赖工具包" class="headerlink" title="1 安装依赖工具包"></a>1 安装依赖工具包</h2><pre><code>sudo apt-get install libssl-dev libavahi-client-dev libasound2-dev libao-dev libpulse-dev</code></pre><hr><h2 id="2-安装shairport"><a href="#2-安装shairport" class="headerlink" title="2 安装shairport"></a>2 安装shairport</h2><pre><code>sudo apt-get install shairport-sync</code></pre><hr>]]></content>
+    <content type="html"><![CDATA[<p>无线音箱，DLNA推送音频，gmediarender -f “raspberry pi”</p><a id="more"></a><h1 id="基于gmediarender树莓派搭建DLNA客户端，只支持音频"><a href="#基于gmediarender树莓派搭建DLNA客户端，只支持音频" class="headerlink" title="基于gmediarender树莓派搭建DLNA客户端，只支持音频"></a>基于gmediarender树莓派搭建DLNA客户端，只支持音频</h1><p>目前搭建DLNA服务器有minidlna，不过不能进行DLNA推送，只能执行树莓派的媒体服务器</p><hr><h2 id="1-更新源，安装依赖"><a href="#1-更新源，安装依赖" class="headerlink" title="1 更新源，安装依赖"></a>1 更新源，安装依赖</h2><pre><code>sudo apt-get updatesudo apt-get install libupnp-dev libgstreamer1.0-dev \gstreamer1.0-plugins-base gstreamer1.0-plugins-good\gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \gstreamer1.0-alsa autoconf</code></pre><hr><h2 id="2-安装gmediarender"><a href="#2-安装gmediarender" class="headerlink" title="2 安装gmediarender"></a>2 安装gmediarender</h2><pre><code>git clone https://github.com/hzeller/gmrender-resurrect.gitcd gmrender-resurrectsudo ./autogen.shsudo ./configuresudo make sudo make install</code></pre><hr><h2 id="3-启动gmediarender"><a href="#3-启动gmediarender" class="headerlink" title="3 启动gmediarender"></a>3 启动gmediarender</h2><pre><code>sudo gmediarender -f &quot;输入DLNA设备名称&quot;</code></pre><hr><h2 id="4-添加到启动项"><a href="#4-添加到启动项" class="headerlink" title="4 添加到启动项"></a>4 添加到启动项</h2><pre><code>sudo nano /etc/rc.local</code></pre><p><em>在exit 0 前添加</em></p><pre><code class="bash">sudo gmediarender -f &quot;设备名称&quot; &amp;</code></pre><p><em>&amp;的意思是作为系统进程开机运行</em></p><hr><hr><h1 id="基于树莓派的Airplay无线音频传输"><a href="#基于树莓派的Airplay无线音频传输" class="headerlink" title="基于树莓派的Airplay无线音频传输"></a>基于树莓派的Airplay无线音频传输</h1><h2 id="1-安装依赖工具包"><a href="#1-安装依赖工具包" class="headerlink" title="1 安装依赖工具包"></a>1 安装依赖工具包</h2><pre><code>sudo apt-get install libssl-dev libavahi-client-dev libasound2-dev libao-dev libpulse-dev</code></pre><hr><h2 id="2-安装shairport"><a href="#2-安装shairport" class="headerlink" title="2 安装shairport"></a>2 安装shairport</h2><pre><code>sudo apt-get install shairport-sync</code></pre><hr><p>效果图<br><img src="/.com//../../../img/gmediarender.png" alt></p>]]></content>
     
     <summary type="html">
     
@@ -79,7 +94,7 @@
 &lt;li&gt;树莓派&lt;/li&gt;
 &lt;li&gt;usb麦克风&lt;/li&gt;
 &lt;li&gt;VLC App&lt;/li&gt;
-&lt;li&gt;耳机
+&lt;li&gt;耳机&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
